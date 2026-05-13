@@ -42,7 +42,10 @@ export class CxTree extends LitElement {
    * **Note**: The loader uses the `VITE_CX_DATA_URL` environment variable to determine the base directory for loading the AAS.
    */
   @state() loader: Loader = new Loader(
-    new URL(import.meta.env.VITE_CX_DATA_URL, document.baseURI).toString()
+    new URL(
+      import.meta.env.VITE_CX_DATA_URL ?? "catena-x-data/motorbike-example",
+      document.baseURI
+    ).toString()
   );
 
   /**
