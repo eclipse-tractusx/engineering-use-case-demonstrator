@@ -539,7 +539,7 @@ export class CxTreeItem extends LitElement {
 
   private _getOwnerColor(): string {
     const mData = getManufacturerData();
-    if (mData === undefined || mData[this.owner] === undefined) {
+    if (mData?.[this.owner] === undefined) {
       return "none";
     }
     return mData[this.owner].color;
