@@ -50,6 +50,16 @@ and click on the link in the terminal (e.g. http://localhost:5173).
 
 Use the `.env` file in the root directory to configure application specific configurations. Currently, there is only the `VITE_CX_DATA_URL` which allows you to set the path from which your Catena-X (mocked) data JSON files lie.
 
+Example `.env`:
+
+```bash
+VITE_CX_DATA_URL=catena-x-data/motorbike-example
+```
+
+Notes:
+- Use a path relative to the app URL (no leading `/`) to work both locally and on GitHub Pages.
+- If `VITE_CX_DATA_URL` is not set, the app falls back to `catena-x-data/motorbike-example`.
+
 ### Webvis Config JSON
 
 Use the `webvis.config.json` file in the root directory to configure webvis to your requirements if needed (see the [official docs](https://docs.threedy.io/3.10.5/tutorials/dev_tutorials/tutorials/settings.html))
