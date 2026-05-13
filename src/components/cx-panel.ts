@@ -19,7 +19,7 @@
 
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { getManufacturerData } from "../utils";
+import { getManufacturerData, isWebvisAvailable } from "../utils";
 import { visDB } from "../visualizer-db";
 
 /**
@@ -45,8 +45,10 @@ export class CxPanel extends LitElement {
   _handleTabClick = async (index: number) => {
     this.aasPath = this._data[Object.keys(this._data)[index]].aas;
     visDB.clear();
-    await webvis.getContext()?.clear();
-    await webvis.getContext()?.setProperty(0, webvis.Property.GHOSTED, false);
+    if (isWebvisAvailable()) {
+      await webvis.getContext()?.clear();
+      await webvis.getContext()?.setProperty(0, webvis.Property.GHOSTED, false);
+    }
   };
 
   static styles = css`
@@ -72,8 +74,10 @@ export class CxPanel extends LitElement {
 
   async connectedCallback(): Promise<void> {
     super.connectedCallback();
-    webvis.addContextCreatedListener(async () => {
-      await this._handleTabClick(0);
-    });
+    if (isWebvisAvailable()) {
+      webvis.addContextCreatedListener(async () => {
+        await this._handleTabClick(0);
+      });
+    }
   }
 }

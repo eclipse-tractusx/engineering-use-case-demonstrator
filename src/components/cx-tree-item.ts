@@ -28,6 +28,7 @@ import {
   isCAD,
   isModelData,
   isPart,
+  isWebvisAvailable,
 } from "../utils";
 import { visDB } from "../visualizer-db";
 
@@ -386,6 +387,9 @@ export class CxTreeItem extends LitElement {
   }
 
   private _visualizeModelData(file: string) {
+    if (!isWebvisAvailable()) {
+      return;
+    }
     const ctx = webvis.getContext();
     if (visDB.has(this.treeItemId) || ctx === undefined) {
       return;
@@ -410,6 +414,9 @@ export class CxTreeItem extends LitElement {
   }
 
   private _unvisualizeModelData() {
+    if (!isWebvisAvailable()) {
+      return;
+    }
     const ctx = webvis.getContext();
     if (!visDB.has(this.treeItemId) || ctx === undefined) {
       return;
