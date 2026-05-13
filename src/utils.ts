@@ -51,6 +51,16 @@ function getNodePathStrings(modelFile: string): string[] {
 }
 
 /**
+ * Checks whether the webvis library has been loaded and is available as a global.
+ * The webvis script is loaded from an external server; when that server is unreachable
+ * (e.g. on GitHub Pages) the global is never defined.
+ * @returns `true` if `webvis` is defined in the global scope, `false` otherwise.
+ */
+export function isWebvisAvailable(): boolean {
+  return typeof (window as unknown as { webvis?: unknown }).webvis !== "undefined";
+}
+
+/**
  * Gets the base data for the manufacturers (AAS path and color).
  * @returns The base data for the manufacturers.
  */
