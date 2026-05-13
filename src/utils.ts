@@ -57,7 +57,7 @@ function getNodePathStrings(modelFile: string): string[] {
  * @returns `true` if `webvis` is defined in the global scope, `false` otherwise.
  */
 export function isWebvisAvailable(): boolean {
-  return typeof (window as unknown as { webvis?: unknown }).webvis !== "undefined";
+  return "webvis" in window;
 }
 
 /**
